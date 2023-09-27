@@ -1,3 +1,21 @@
+<?php
+$current_url = $_SERVER['REQUEST_URI'];
+$filename = basename($current_url);
+$homeatr = "";
+$vehatr = "";
+$conatr = "";
+$regatr = "";
+
+if($filename == "index.php"){
+    $homeatr = "active";
+}elseif($filename == "vehicles.php"){
+    $vehatr = "active";
+}elseif($filename == "contactus.php"){
+    $conatr = "active";
+}elseif($filename == "register.php"){
+    $regatr = "active";
+}
+?>
 
 
 <!DOCTYPE html>
@@ -10,10 +28,10 @@
 </head>
 <body>
     <nav class="nav nav-pills nav-justified">
-        <a class="nav-link active navitem" href="index.php">Home</a>
-        <a class="nav-link " href="vehicles.php">Vehicles</a>
-        <a class="nav-link " href="contactus.php">Contact</a>
-        <a class="nav-link " href="register.php">Register</a>
+        <a class="nav-link <?php echo $homeatr ?> navitem " href="index.php">Home</a>
+        <a class="nav-link <?php echo $vehatr ?> navitem " href="vehicles.php">Vehicles</a>
+        <a class="nav-link <?php echo $conatr ?> navitem " href="contactus.php">Contact</a>
+        <a class="nav-link <?php echo $regatr ?> navitem " href="register.php">Register</a>
     </nav>
 
 </body>
