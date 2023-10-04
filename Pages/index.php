@@ -57,22 +57,23 @@ require "nav.php";
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
       <!-- pravila -->
       <div class="feature col">
-        <div>
-        <img href="../icons/rules.png" ></img>
-        </div>
-        <h3 class="fs-2 text-body-emphasis">Правила</h3>
-        <ol>
+        <div class="icondiv">
+          <img id="ruleicon" src="../icons/rules.png" alt="rules">
+      </div>
+        <h3 class="fs-2 ruleh3 text-body-emphasis">Правила</h3>
+        <ol class="ordered-list">
           <li>Всеки има по 10 безплатни минути игра на ден.</li>
           <li>Без нарочно блъскане и чупене на моделите.</li>
           <li>Не споделяйте паролата си с никого!</li>
           <li>Гонките са позволени!</li>
           <li>И най-важното, забавлявайте се!</li>
-          <h5 class="rules">При нарушаване на някое от горе показаните правила, извършителят ще бъде наказан</h>
+          <h5 class="rules">При нарушаване на някое от горе показаните правила, извършителят ще бъде наказан!</h>
         </ol>
       </div>
 
+      <!-- cenoraspis -->
       <div class="feature col">
-        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+        <div class="">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
         </div>
         <h3 class="fs-2 text-body-emphasis">Featured title</h3>
