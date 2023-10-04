@@ -23,22 +23,22 @@ require "nav.php";
     <div class="carousel-item active">
       <img src="../images/tankjpg.jpg" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>RC Tank</h5>
-        <p>Perfect for offroad!</p>
+        <h5>Танк 1.0</h5>
+        <p>Перфектен за всякакви условия!</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="../images/f1.jpg" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>RC F1</h5>
-        <p>Perfect when you need speed!</p>
+        <h5>F1</h5>
+        <p>Когато ви трябва скорост, F1 ще Ви свърши работа!</p>
       </div>
     </div>
     <div class="carousel-item">
       <img src="../images/boat.jpg" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>RC Benchy</h5>
-        <p>An answer for the water.</p>
+        <h5>Бенчи Лодка</h5>
+        <p>Решението за водата.</p>
       </div>
     </div>
   </div>
@@ -51,6 +51,50 @@ require "nav.php";
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+<!--  Mid section s iconci   -->
+<div class="container px-4 py-5" id="featured-3">
+    <h2 class="pb-2 border-bottom">Обща информация</h2>
+    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <!-- pravila -->
+      <div class="feature col">
+        <div>
+        <img href="../icons/rules.png" ></img>
+        </div>
+        <h3 class="fs-2 text-body-emphasis">Правила</h3>
+        <ol>
+          <li>Всеки има по 10 безплатни минути игра на ден.</li>
+          <li>Без нарочно блъскане и чупене на моделите.</li>
+          <li>Не споделяйте паролата си с никого!</li>
+          <li>Гонките са позволени!</li>
+          <li>И най-важното, забавлявайте се!</li>
+          <h5 class="rules">При нарушаване на някое от горе показаните правила, извършителят ще бъде наказан</h>
+        </ol>
+      </div>
+
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
+        </div>
+        <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link">
+          Call to action
+          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+        </a>
+      </div>
+      <div class="feature col">
+        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
+        </div>
+        <h3 class="fs-2 text-body-emphasis">Featured title</h3>
+        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+        <a href="#" class="icon-link">
+          Call to action
+          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
+        </a>
+      </div>
+    </div>
+  </div>
     
 </body>
 </html>
