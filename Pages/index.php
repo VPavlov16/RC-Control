@@ -73,15 +73,18 @@ require "nav.php";
 
       <!-- cenoraspis -->
       <div class="feature col">
-        <div class="">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#people-circle"></use></svg>
-        </div>
-        <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link">
-          Call to action
-          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-        </a>
+        <div class="icondiv">
+          <img id="ruleicon" src="../icons/money.png" alt="rules">
+      </div>
+        <h3 class="fs-2 ruleh3 text-body-emphasis">Ценоразпис на пакети</h3>
+        <ol class="ordered-list prices">
+          <li>Малък пакет - 10лв</li>
+          <li>Среден пакет - 18лв.</li>
+          <li>Голям пакет - 28лв</li>
+          <li>Гига пакет - 40лв</li>
+        </ol>
+        <a class="plink" href="prices.php">За повече информация натиснете тук.</a>
+      
       </div>
       <div class="feature col">
         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">

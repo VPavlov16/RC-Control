@@ -28,3 +28,11 @@
 .ordered-list{
     margin-top: 20px;
 }
+.prices{
+   display: grid;
+   place-items: center;
+}
+.plink{
+    display: grid;
+   place-items: center;
+}
