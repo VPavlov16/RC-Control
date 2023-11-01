@@ -11,7 +11,7 @@
 .rules{
     font-size: 16px;
 }
-.ruleh3{
+.ruleh3, .probDiv{
     text-align: center;
 }
 .icondiv{
@@ -35,4 +35,7 @@
 .plink{
     display: grid;
    place-items: center;
+}
+.problem, .email{
+    width: 80% ;
 }

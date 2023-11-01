@@ -8,7 +8,8 @@
  .navitem{
   border-radius: 0 !important;
   background-color:#0a53be !important;
-  color: #000000 !important;
+  font-family: Verdana, sans-serif !important;  
+  color: white !important;
  }
  .active{
   background-color: #0197F6 !important;

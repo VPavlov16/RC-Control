@@ -84,19 +84,23 @@ require "nav.php";
           <li>Гига пакет - 40лв</li>
         </ol>
         <a class="plink" href="prices.php">За повече информация натиснете тук.</a>
-      
       </div>
+
+      <!-- contact us  -->
       <div class="feature col">
-        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
-        </div>
-        <h3 class="fs-2 text-body-emphasis">Featured title</h3>
-        <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
-        <a href="#" class="icon-link">
-          Call to action
-          <svg class="bi"><use xlink:href="#chevron-right"></use></svg>
-        </a>
+        <div class="icondiv">
+          <img id="ruleicon" src="../icons/help.png" alt="rules">
       </div>
+        <h3 class="fs-2 ruleh3 text-body-emphasis">Имате нужда от помощ?</h3>
+        <div class="probDiv">
+        <label for="email">Въведете вашият E-mail: </label>
+        <input type="text" class ="email" placeholder="E-mail" name="email" id="email" required>
+        <label for="problem">Въведете проблема Ви:  </label>
+        <textarea rows=3 cols=23  class ="problem" placeholder="Въведете вашият проблем/въпрос тук!" name="problem" id="problem  " required></textarea>
+        </div>
+
+      </div>
+
     </div>
   </div>
     

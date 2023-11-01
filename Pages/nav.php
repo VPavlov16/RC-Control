@@ -10,7 +10,7 @@ if($filename == "index.php"){
     $homeatr = "active";
 }elseif($filename == "vehicles.php"){
     $vehatr = "active";
-}elseif($filename == "contactus.php"){
+}elseif($filename == "control.php"){
     $conatr = "active";
 }elseif($filename == "register.php"){
     $regatr = "active";
@@ -30,7 +30,7 @@ if($filename == "index.php"){
     <nav class="nav nav-pills nav-justified">
         <a class="nav-link <?php echo $homeatr ?> navitem " href="index.php">Начало</a>
         <a class="nav-link <?php echo $vehatr ?> navitem " href="vehicles.php">RC Устройства</a>
-        <a class="nav-link <?php echo $conatr ?> navitem " href="contactus.php">Контакти</a>
+        <a class="nav-link <?php echo $conatr ?> navitem " href="control.php">Управление</a>
         <a class="nav-link <?php echo $regatr ?> navitem " href="register.php">Регистриране</a>
     </nav>
 
