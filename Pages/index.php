@@ -97,6 +97,7 @@ require "nav.php";
         <input type="text" class ="email" placeholder="E-mail" name="email" id="email" required>
         <label for="problem">Въведете проблема Ви:  </label>
         <textarea rows=3 cols=23  class ="problem" placeholder="Въведете вашият проблем/въпрос тук!" name="problem" id="problem  " required></textarea>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit" name="submit">Изпращане</button>
         </div>
 
       </div>
