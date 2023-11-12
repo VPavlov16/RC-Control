@@ -29,6 +29,19 @@ body{
   border-radius: 5px;
   box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
 }
+#check, #check2{
+  transform:scale(1.5,1.5)
+}
+.shpass{
+  text-align: center;
+  font-size: 120%;
+}
+.shpass i{
+  font-size: 120%;
+}
+a{
+  cursor: pointer;
+}
 .wrapper .title{
   height: 90px;
   background: var(--lightBlue);

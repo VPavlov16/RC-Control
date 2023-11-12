@@ -10,29 +10,103 @@ require "nav.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Login Form | CodingLab</title> 
     <link rel="stylesheet" href="../CSS/reg.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
   </head>
   <body>
-    <div class="container">
+    <!-- log -->
+    <div id="log" class="container">
       <div class="wrapper">
-        <div class="title"><span>Login Form</span></div>
+        <div class="title"><span>Login</span></div>
         <form action="#">
           <div class="row">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Email or Phone" required>
+            <input type="email" placeholder="Email" required>
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" required>
+            <input type="password" id="passw" placeholder="Password" required>
           </div>
-          <div class="pass"><a href="#">Forgot password?</a></div>
+          <div class="shpass pass">
+            <i class="far fa-eye-slash" id="icon" style="color: #0197f6; margin-right: 5px;"></i>
+            <input id="check" type="checkbox" onclick="showPass()">
+            <label for="check">Show password</label>
+          </div>
+          
           <div class="row button">
             <input type="submit" value="Login">
           </div>
-          <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+          <div class="signup-link"><a href="#">Forgot password?</a></div>
+          <div class="signup-link">Not a member? <a onclick="reg()">Signup now</a></div>
         </form>
       </div>
     </div>
+    <!-- reg -->
+    <div id="reg" class="container">
+      <div class="wrapper">
+        <div class="title"><span>Register</span></div>
+        <form action="#">
+          <div class="row">
+            <i class="fas fa-user" id="icon"></i>
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="passw2" placeholder="Password" required>
+          </div>
+          <div class="shpass pass">
+            <i class="far fa-eye-slash" id="icon2" style="color: #0197f6; margin-right: 5px;"></i>
+            <input id="check2" type="checkbox" onclick="showPass()">
+            <label for="check2">Show password</label>
+          </div>
+          <div class="row button">
+            <input type="submit" value="Register">
+          </div>
+          <div class="signup-link">Already a member? <a onclick="log()">Login now</a></div>
+        </form>
+      </div>
+    </div>
+    
+    <script>
+      function reg(){
+        document.getElementById("log").style.display = "none";
+        document.getElementById("reg").style.display = "flex";
+      }
 
+      function log(){
+        document.getElementById("reg").style.display = "none";
+        document.getElementById("log").style.display = "flex";
+      }
+
+      function showPass() {
+        let x = document.getElementById("passw");
+        let y = document.getElementById("passw2");
+        let icon = document.getElementById("icon");
+        let icon2 = document.getElementById("icon2");
+        if (x.type === "password") {
+          x.type = "text";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+          
+        } else {
+          x.type = "password";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+          
+        }
+        if (y.type === "password") {
+          y.type = "text";
+          icon2.classList.remove("fa-eye-slash");
+          icon2.classList.add("fa-eye");
+        } else {
+          y.type = "password";
+          icon2.classList.remove("fa-eye");
+          icon2.classList.add("fa-eye-slash");
+        }
+              
+
+
+      }
+
+    </script>
   </body>
 </html>
