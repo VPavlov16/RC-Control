@@ -3,7 +3,6 @@ require "nav.php";
 ?>
 
 <!DOCTYPE html>
-<!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -44,14 +43,14 @@ require "nav.php";
     <div id="reg" class="container">
       <div class="wrapper">
         <div class="title"><span>Register</span></div>
-        <form action="#">
+        <form action="../PHP/regController.php" method="POST">
           <div class="row">
             <i class="fas fa-user" id="icon"></i>
-            <input type="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required>
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" id="passw2" placeholder="Password" required>
+            <input type="password" name="passw2" id="passw2" placeholder="Password" required>
           </div>
           <div class="shpass pass">
             <i class="far fa-eye-slash" id="icon2" style="color: #0197f6; margin-right: 5px;"></i>
@@ -59,7 +58,7 @@ require "nav.php";
             <label for="check2">Show password</label>
           </div>
           <div class="row button">
-            <input type="submit" value="Register">
+            <input type="submit"  value="Register">
           </div>
           <div class="signup-link">Already a member? <a onclick="log()">Login now</a></div>
         </form>
