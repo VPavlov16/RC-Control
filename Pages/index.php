@@ -2,6 +2,7 @@
 require "nav.php";
 ?>
 
+
 <!DOCTYPE html>
 <html lang="bg">
 <head>
@@ -87,6 +88,7 @@ require "nav.php";
       </div>
 
       <!-- contact us  -->
+      <form action="#" method="POST">
       <div class="feature col">
         <div class="icondiv">
           <img id="ruleicon" src="../icons/help.png" alt="rules">
@@ -101,6 +103,7 @@ require "nav.php";
         </div>
 
       </div>
+      </form>
 
     </div>
   </div>

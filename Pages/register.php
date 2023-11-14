@@ -7,7 +7,7 @@ require "nav.php";
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Login Form | CodingLab</title> 
+     <title>Login Form</title> 
     <link rel="stylesheet" href="../CSS/reg.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
   </head>
@@ -16,14 +16,14 @@ require "nav.php";
     <div id="log" class="container">
       <div class="wrapper">
         <div class="title"><span>Login</span></div>
-        <form action="#">
+        <form action="../PHP/logController.php" method="POST">
           <div class="row">
             <i class="fas fa-user"></i>
-            <input type="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Email" required>
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" id="passw" placeholder="Password" required>
+            <input type="password" name="pass" id="passw" placeholder="Password" required>
           </div>
           <div class="shpass pass">
             <i class="far fa-eye-slash" id="icon" style="color: #0197f6; margin-right: 5px;"></i>
