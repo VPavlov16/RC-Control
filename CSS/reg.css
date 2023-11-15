@@ -12,8 +12,10 @@
 }
 body{
   background-image: url("../images/background.png");
-  background-repeat: no-repeat;
-  background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 #reg{
   display: none;
@@ -33,6 +35,13 @@ body{
   box-shadow: 0px 4px 10px 1px rgba(0,0,0,0.1);
 }
 #check, #check2{
+  transform:scale(1.5,1.5)
+}
+.remember{
+  text-align: center;
+  font-size: 120%;
+}
+#rem{
   transform:scale(1.5,1.5)
 }
 .shpass{

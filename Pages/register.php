@@ -30,6 +30,12 @@ require "nav.php";
             <input id="check" type="checkbox" onclick="showPass()">
             <label for="check">Show password</label>
           </div>
+          <div class="remember">
+              <i class="far fa-save fa-lg" id="iconka" style="color: #0197f6; margin-right: 5px;"></i>
+              <input id="rem"  name="remember_me" type="checkbox">
+              <label for="rem">Remember me</label>
+          </div>
+         
           
           <div class="row button">
             <input type="submit" value="Login">

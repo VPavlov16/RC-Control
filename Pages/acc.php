@@ -42,6 +42,23 @@ try {
     <label for="email">Email:</label>
     <?php echo"<p id='email' class='p-info'>".$info['email']."</p>"?>
     <br>
+    <button class="button">Change Email</button>
+    <br>
+    <button class="button">Change Password</button>
+    <br>
+    <button class="button" onclick=logout()>Log Out</button>
     </div>
 </body>
+<script>
+function logout() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            window.location.href = 'index.php';
+        }
+    };
+    xhttp.open("GET", "../PHP/logout.php", true);
+    xhttp.send();
+}
+</script>
 </html>

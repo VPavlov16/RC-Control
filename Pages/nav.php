@@ -1,7 +1,40 @@
 <?php
-
+session_start();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+
+$host = "localhost";
+$port = "5432";
+$dbname = "postgres";
+$user = "postgres";
+$password = "admin";
+
+$dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
+try {
+    $conn = new PDO($dsn);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+//remember me login check
+if (isset($_COOKIE['remember_email']) && isset($_COOKIE['remember_token'])) {
+    $email = $_COOKIE['remember_email'];
+    $token = $_COOKIE['remember_token'];
+
+    $sql = "SELECT * FROM users WHERE email = :email AND token = :token";
+    
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':token', $token);
+
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            $_SESSION['user'] = [$user['id'], $user['email']]; 
+        }
 }
 $btn = "";
 $name = "";

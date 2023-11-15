@@ -27,20 +27,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':password', $hashedPassword);
 
-    try {
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION['user'] = [$user['id'], $user['email']];  // Store user data in the session
+            $_SESSION['user'] = [$user['id'], $user['email']]; 
+            session_regenerate_id(true);
+
+            if (isset($_POST['remember_me'])) {
+                $token = bin2hex(random_bytes(16));
+                setcookie('remember_token', $token, time() + 604800,'/');
+                setcookie('remember_email', $email, time() + 604800,'/');
+
+
+                $sql2 = "UPDATE users SET token = :token WHERE email = :email";
+    
+                $stmt2 = $conn->prepare($sql2);
+                $stmt2->bindParam(':email', $email);
+                $stmt2->bindParam(':token', $token);
+
+                $stmt2->execute();
+            }
             header("Location: ../Pages/index.php");
             exit();
         } else {
-            echo "Invalid email or password. Please try again.";
+           // echo "Invalid email or password. Please try again.";
         }
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
     
     $conn = null;
 }
