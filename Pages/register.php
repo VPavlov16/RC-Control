@@ -22,7 +22,7 @@ require "nav.php";
         color: red;
         font-size: 20px;
         text-align: center;
-        justify-content: center;  
+        justify-content: center; 
         display: <?php echo $_SESSION['emInfo']; ?>;
       }
     </style>
@@ -71,7 +71,7 @@ require "nav.php";
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" name="passw2" id="passw2" placeholder="Password" required>
+            <input type="password" name="passw2" id="passw2" min=8 max=30 placeholder="Password" required>
           </div>
           <h5 class="wrongEmail" id="wrongEmail">Email is already registered</h5>
           <div class="shpass pass">

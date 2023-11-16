@@ -1,4 +1,6 @@
 <?php
+session_start();
+$_SESSION['info'] = "none";
 
 $host = "localhost";
 $port = "5432";
@@ -17,24 +19,34 @@ try {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $rawPassword = $_POST["passw2"];
+    $_SESSION['emInfo'] = "none";
 
     $hashedPassword = hash('sha256', $rawPassword);
 
-    $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+    $checkEmailSql = "SELECT COUNT(*) FROM users WHERE email = :email";
+    $checkEmailStmt = $conn->prepare($checkEmailSql);
+    $checkEmailStmt->bindParam(':email', $email);
+    $checkEmailStmt->execute();
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $hashedPassword);
+    if ($checkEmailStmt->fetchColumn() > 0) {
+        $_SESSION['emInfo'] = "flex";
+        header("Location: ../Pages/register.php");
+        exit();
+    }
+
+    $insertUserSql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+    $insertUserStmt = $conn->prepare($insertUserSql);
+    $insertUserStmt->bindParam(':email', $email);
+    $insertUserStmt->bindParam(':password', $hashedPassword);
 
     try {
-        $stmt->execute();
+        $insertUserStmt->execute();
         header("Location: ../Pages/index.php");
         exit();
-       
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-   
+
     $conn = null;
 }
 ?>
