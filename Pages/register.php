@@ -10,6 +10,22 @@ require "nav.php";
      <title>Login Form</title> 
     <link rel="stylesheet" href="../CSS/reg.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <style>
+      .wrongInfo{
+        color: red;
+        font-size: 20px;
+        text-align: center;
+        justify-content: center;  
+        display: <?php echo $_SESSION['info']; ?>;
+      }
+      .wrongEmail{
+        color: red;
+        font-size: 20px;
+        text-align: center;
+        justify-content: center;  
+        display: <?php echo $_SESSION['emInfo']; ?>;
+      }
+    </style>
   </head>
   <body>
     <!-- log -->
@@ -35,8 +51,7 @@ require "nav.php";
               <input id="rem"  name="remember_me" type="checkbox">
               <label for="rem">Remember me</label>
           </div>
-         
-          
+          <h5 class="wrongInfo" id="wrongInfo">Wrong password/email</h5>
           <div class="row button">
             <input type="submit" value="Login">
           </div>
@@ -58,6 +73,7 @@ require "nav.php";
             <i class="fas fa-lock"></i>
             <input type="password" name="passw2" id="passw2" placeholder="Password" required>
           </div>
+          <h5 class="wrongEmail" id="wrongEmail">Email is already registered</h5>
           <div class="shpass pass">
             <i class="far fa-eye-slash" id="icon2" style="color: #0197f6; margin-right: 5px;"></i>
             <input id="check2" type="checkbox" onclick="showPass()">

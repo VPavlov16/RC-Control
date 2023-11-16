@@ -1,6 +1,5 @@
 <?php
-session_start();  // Start the session
-
+session_start(); 
 $host = "localhost";
 $port = "5432";
 $dbname = "postgres";
@@ -13,6 +12,10 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
+}
+
+if (!isset($_SESSION['info'])) {
+    $_SESSION['info'] = "none";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION['user'] = [$user['id'], $user['email']]; 
+            $_SESSION['user'] = [$user['id'], $user['email'],$user['info']]; 
+            $_SESSION['info'] = "none";
             session_regenerate_id(true);
 
             if (isset($_POST['remember_me'])) {
@@ -51,7 +55,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../Pages/index.php");
             exit();
         } else {
-           // echo "Invalid email or password. Please try again.";
+            $_SESSION['info'] = "flex";
+            header("Location: ../Pages/register.php");
         }
     
     $conn = null;
