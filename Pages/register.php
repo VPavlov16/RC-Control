@@ -129,5 +129,6 @@ require "nav.php";
       }
 
     </script>
+    
   </body>
 </html>

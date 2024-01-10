@@ -42,6 +42,9 @@ try {
     <label for="email">Email:</label>
     <?php echo"<p id='email' class='p-info'>".$info['email']."</p>"?>
     <br>
+    <label for="mins">Your minutes:</label>
+    <?php echo"<p id='mins' class='p-info'>".$info['minutes']."</p>"?>
+    <br>
     <button class="button">Change Email</button>
     <br>
     <button class="button">Change Password</button>

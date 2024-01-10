@@ -47,7 +47,7 @@ if (isset($_SESSION['user'])) {
 }else{
     $btn = "regatr";
     $name = "register.php";
-    $text = "Регистриране";
+    $text = "Влизане";
 }
 
 $current_url = $_SERVER['REQUEST_URI'];

@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['info'] = "none";
+$_SESSION['emInfo'] = "none";
 
 $host = "localhost";
 $port = "5432";

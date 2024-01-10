@@ -1,7 +1,25 @@
-<?php 
+<?php
 require "nav.php";
-?>
 
+$host = "localhost";
+$port = "5432";
+$dbname = "postgres";
+$user = "postgres";
+$password = "admin";
+
+$dsn = "pgsql:host=$host;port=$port;dbname=$dbname;user=$user;password=$password";
+
+try {
+    $pdo = new PDO($dsn);
+} catch (PDOException $e) {
+    die("Error: " . $e->getMessage());
+}
+
+$sql = "SELECT name, description, usedby, pic FROM vehicles";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="bg" dir="ltr">
   <head>
@@ -71,45 +89,42 @@ require "nav.php";
         display: block !important;
       }
     </style>
-
-    
   </head>
   <body>
-<main>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Албум с всички RC устройства.</h1>
-        <p class="lead text-body-secondary">Тук можете да разгледате различните налични RC устройства и техните индивидуални възможности, характеристики и части на устройството.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="album py-5 bg-body-tertiary">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-body-secondary">9 mins</small>
-              </div>
-            </div>
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Албум с всички RC устройства.</h1>
+            <p class="lead text-body-secondary">Тук можете да разгледате различните налични RC устройства и техните индивидуални възможности, характеристики и части на устройството.</p>
           </div>
         </div>
+      </section>
 
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <?php foreach ($vehicles as $vehicle): ?>
+              <div class="col">
+                <div class="card shadow-sm h-100 d-flex flex-column">
+                  <img src="../images/<?php echo $vehicle['pic']; ?>" alt="<?php echo $vehicle['name']; ?>" class="bd-placeholder-img card-img-top" width="100%" height="225">
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title"><?php echo $vehicle['name']; ?></h5>
+                    <p class="card-text flex-grow-1"><?php echo $vehicle['description']; ?></p>
+                    <?php if ($vehicle['usedby']): ?>
+                      <button class="btn btn-danger mt-2" disabled>Устройството е заето!</button>
+                    <?php else: ?>
+                      <button class="btn btn-success mt-2">Играй!</button>
+                    <?php endif; ?>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </main>
 
-</main>
-</body>
+    
+  </body>
 </html>
