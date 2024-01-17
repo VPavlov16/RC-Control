@@ -33,7 +33,8 @@ if (isset($_COOKIE['remember_email']) && isset($_COOKIE['remember_token'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION['user'] = [$user['id'], $user['email']]; 
+            $_SESSION['user'] = [$user['id'], $user['email'],$user['minutes']]; 
+            $_SESSION['info'] = "none";
         }
 }
 $btn = "";
