@@ -19,7 +19,7 @@ try {
 $selectedVehicleId = isset($_GET['vid']) ? $_GET['vid'] : null;
 
 if ($selectedVehicleId) {
-    $sql = "SELECT name, pic FROM vehicles WHERE vid = :vid";
+    $sql = "SELECT name, usedby, pic FROM vehicles WHERE vid = :vid";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':vid', $selectedVehicleId);
     $stmt->execute();
@@ -79,25 +79,34 @@ if ($selectedVehicleId) {
 </head>
 <body>
 
-<?php if ($selectedVehicle): ?>
+<?php if ($selectedVehicle !== null): ?>
     <div class="selected-vehicle">
         <img src="../images/<?php echo $selectedVehicle['pic']; ?>" alt="<?php echo $selectedVehicle['name']; ?>">
         <p style="margin: 0;"><?php echo $selectedVehicle['name']; ?></p>
     </div>
-<?php elseif (!$selectedVehicleId): ?>
+
+    <?php if ($selectedVehicle['usedby'] !== null): ?>
+        <div class="no-vehicle">
+            <p>Моля, изберете друго устройство!</p>
+            <a class="btn btn-primary" href="vehicles.php">Избери устройство</a>
+        </div>
+    <?php else: ?>
+        <div class="minutes">
+            <p style="margin: 0;">Налични минути: <?php echo $mins; ?></p>
+        </div>
+        <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Start</button>
+    <?php endif; ?>
+
+<?php else: ?>
     <div class="no-vehicle">
         <p>Моля, изберете устройство!</p>
         <a class="btn btn-primary" href="vehicles.php">Избери устройство</a>
     </div>
 <?php endif; ?>
 
-<div class="minutes">
-    <p style="margin: 0;">Налични минути: <?php echo $mins; ?></p>
-</div>
-
 <script>
     document.getElementById('startButton').addEventListener('click', function () {
-
+        // Your start button logic here
     });
 </script>
 
