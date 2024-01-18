@@ -1,6 +1,8 @@
 <?php
 require "nav.php";
-$mins = $user['minutes'];
+if (isset($_SESSION['user'])){
+    $mins = $user['minutes'];
+}
 
 $host = "localhost";
 $port = "5432";
@@ -24,6 +26,15 @@ if ($selectedVehicleId) {
     $stmt->bindParam(':vid', $selectedVehicleId);
     $stmt->execute();
     $selectedVehicle = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    $svg = "";
+    if ($selectedVehicle['name'] == "RC Speed Tank"){
+        $svg = "tank.svg";
+    }elseif ($selectedVehicle['name'] == "F1"){
+        $svg = "f1.svg";
+    }elseif ($selectedVehicle['name'] == "RC Benchy"){
+        $svg = "benchy.svg";
+    }
 } else {
     $selectedVehicle = null;
 }
@@ -81,7 +92,9 @@ if ($selectedVehicleId) {
 
 <?php if ($selectedVehicle !== null): ?>
     <div class="selected-vehicle">
-        <img src="../images/<?php echo $selectedVehicle['pic']; ?>" alt="<?php echo $selectedVehicle['name']; ?>">
+        <a href="#">
+            <img src="../images/svg/<?php echo $svg; ?>" alt="<?php echo $selectedVehicle['name']; ?>">
+        </a>
         <p style="margin: 0;"><?php echo $selectedVehicle['name']; ?></p>
     </div>
 

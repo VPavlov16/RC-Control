@@ -114,8 +114,10 @@ $plink = "";
                                 <p class="card-text flex-grow-1"><?php echo $vehicle['description']; ?></p>
                                 <?php if ($vehicle['usedby']): ?>
                                     <button class="btn btn-danger mt-2" disabled>Устройството е заето!</button>
-                                <?php else: ?>
+                                <?php elseif (isset($_SESSION['user'])): ?>
                                     <a href="control.php?vid=<?php echo $vehicle['vid']; ?>" class="btn btn-success mt-2" onclick="return confirm('Сигурни ли сте, че искате да използвате това устройство?')">Играй!</a>
+                                <?php else: ?>
+                                    <a href="register.php" class="btn btn-success mt-2" onclick="return confirm('За да играете трябва да имате регистрация!')">Играй!</a>
                                 <?php endif; ?>
                             </div>
                         </div>
