@@ -30,9 +30,9 @@ if ($selectedVehicleId) {
     $svg = "";
     if ($selectedVehicle['name'] == "RC Speed Tank"){
         $svg = "tank.svg";
-    }elseif ($selectedVehicle['name'] == "F1"){
+    } elseif ($selectedVehicle['name'] == "F1"){
         $svg = "f1.svg";
-    }elseif ($selectedVehicle['name'] == "RC Benchy"){
+    } elseif ($selectedVehicle['name'] == "RC Benchy"){
         $svg = "benchy.svg";
     }
 } else {
@@ -86,6 +86,69 @@ if ($selectedVehicleId) {
             transform: translateX(-50%);
             text-align: center;
         }
+
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            background-color: #0a53be; 
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px 10px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        button:hover {
+            background-color: #0197F6; 
+        }
+        #keyboardButtons {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid blue;
+            border-radius: 10px;
+            background-color: #fff;
+            padding: 20px;
+            width: 300px; /* Adjust the width as needed */
+        }
+
+        .keyboard-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .keyboard-key {
+            width: 50px;
+            height: 50px;
+            font-size: 16px;
+            background-color: #0a53be; 
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .keyboard-key:hover {
+            background-color: #0197F6;
+        }
+
+        #backButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px; /* Adjust the padding for smaller button */
+            font-size: 14px; /* Adjust the font size for smaller text */
+        }
     </style>
 </head>
 <body>
@@ -108,6 +171,29 @@ if ($selectedVehicleId) {
             <p style="margin: 0;">Налични минути: <?php echo $mins; ?></p>
         </div>
         <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Start</button>
+        <div id="controlButtons" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <button id="wasdButton">WASD</button>
+            <button id="arrowsButton">Arrows</button>
+        </div>
+        <div id="keyboardButtons">
+            <button id="backButton">Back</button>
+            <div class="keyboard-row wasd">
+                <button class="keyboard-key">W</button>
+            </div>
+            <div class="keyboard-row wasd">
+                <button class="keyboard-key">A</button>
+                <button class="keyboard-key">S</button>
+                <button class="keyboard-key">D</button>
+            </div>
+            <div class="keyboard-row arrows">
+                <button class="keyboard-key">↑</button>
+            </div>
+            <div class="keyboard-row arrows">
+                <button class="keyboard-key">←</button>
+                <button class="keyboard-key">↓</button>
+                <button class="keyboard-key">→</button>
+            </div>
+        </div>
     <?php endif; ?>
 
 <?php else: ?>
@@ -119,7 +205,33 @@ if ($selectedVehicleId) {
 
 <script>
     document.getElementById('startButton').addEventListener('click', function () {
-        // Your start button logic here
+        document.getElementById('startButton').style.display = 'none';
+        document.getElementById('controlButtons').style.display = 'flex';
+    });
+
+    document.getElementById('wasdButton').addEventListener('click', function () {
+        document.getElementById('keyboardButtons').style.display = 'block';
+        document.querySelectorAll('.wasd').forEach(function(el) {
+            el.style.display = 'flex';
+        });
+        document.querySelectorAll('.arrows').forEach(function(el) {
+            el.style.display = 'none';
+        });
+    });
+
+    document.getElementById('arrowsButton').addEventListener('click', function () {
+        document.getElementById('keyboardButtons').style.display = 'block';
+        document.querySelectorAll('.wasd').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        document.querySelectorAll('.arrows').forEach(function(el) {
+            el.style.display = 'flex';
+        });
+    });
+
+    document.getElementById('backButton').addEventListener('click', function () {
+        document.getElementById('keyboardButtons').style.display = 'none';
+        document.getElementById('controlButtons').style.display = 'block';
     });
 </script>
 
