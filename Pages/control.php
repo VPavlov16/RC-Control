@@ -1,8 +1,21 @@
 <?php
 require "nav.php";
-if (isset($_SESSION['user'])){
+require '../vendor/autoload.php';
+
+
+if (isset($_SESSION['user'])) {
     $mins = $user['minutes'];
 }
+
+$server   = 'public.mqtthq.com';
+$port     = 1883;
+
+use PhpMqtt\Client\MqttClient;
+
+$mqtt = new MqttClient($server, $port);
+
+$mqtt->connect();
+//$mqtt->publish('RCControl', 'Hello!', 0);
 
 $host = "localhost";
 $port = "5432";
@@ -114,7 +127,7 @@ if ($selectedVehicleId) {
             border-radius: 10px;
             background-color: #fff;
             padding: 20px;
-            width: 300px; /* Adjust the width as needed */
+            width: 300px;
         }
 
         .keyboard-row {
@@ -146,8 +159,8 @@ if ($selectedVehicleId) {
             position: absolute;
             top: 10px;
             left: 10px;
-            padding: 5px 10px; /* Adjust the padding for smaller button */
-            font-size: 14px; /* Adjust the font size for smaller text */
+            padding: 5px 10px;
+            font-size: 14px; 
         }
     </style>
 </head>
@@ -170,28 +183,28 @@ if ($selectedVehicleId) {
         <div class="minutes">
             <p style="margin: 0;">Налични минути: <?php echo $mins; ?></p>
         </div>
-        <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Start</button>
+        <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Старт</button>
         <div id="controlButtons" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
             <button id="wasdButton">WASD</button>
             <button id="arrowsButton">Arrows</button>
         </div>
         <div id="keyboardButtons">
-            <button id="backButton">Back</button>
+            <button id="backButton">Назад</button>
             <div class="keyboard-row wasd">
-                <button class="keyboard-key">W</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('forward');" >W</button>
             </div>
             <div class="keyboard-row wasd">
-                <button class="keyboard-key">A</button>
-                <button class="keyboard-key">S</button>
-                <button class="keyboard-key">D</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('left');">A</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('backwards');">S</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('right');">D</button>
             </div>
             <div class="keyboard-row arrows">
-                <button class="keyboard-key">↑</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('forward');">↑</button>
             </div>
             <div class="keyboard-row arrows">
-                <button class="keyboard-key">←</button>
-                <button class="keyboard-key">↓</button>
-                <button class="keyboard-key">→</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('left');">←</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('backwards');">↓</button>
+                <button class="keyboard-key" onclick="sendMqttMessage('right');">→</button>
             </div>
         </div>
     <?php endif; ?>
@@ -204,6 +217,22 @@ if ($selectedVehicleId) {
 <?php endif; ?>
 
 <script>
+    function sendMqttMessage(direction) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    console.log('MQTT message sent successfully.');
+                } else {
+                    console.error('Error sending MQTT message.');
+                }
+            }
+        };
+        xhr.open("POST", "../PHP/send_message.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("direction=" + direction);
+    }
+
     document.getElementById('startButton').addEventListener('click', function () {
         document.getElementById('startButton').style.display = 'none';
         document.getElementById('controlButtons').style.display = 'flex';
@@ -232,6 +261,29 @@ if ($selectedVehicleId) {
     document.getElementById('backButton').addEventListener('click', function () {
         document.getElementById('keyboardButtons').style.display = 'none';
         document.getElementById('controlButtons').style.display = 'block';
+    });
+
+    document.addEventListener('keydown', function(event) {
+        switch(event.key) {
+            case 'w':
+            case 'ArrowUp':
+                sendMqttMessage('forward');
+                break;
+            case 'a':
+            case 'ArrowLeft':
+                sendMqttMessage('left');
+                break;
+            case 's':
+            case 'ArrowDown':
+                sendMqttMessage('backward');
+                break;
+            case 'd':
+            case 'ArrowRight':
+                sendMqttMessage('right');
+                break;
+            default:
+                break;
+        }
     });
 </script>
 
