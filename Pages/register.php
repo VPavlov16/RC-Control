@@ -55,7 +55,7 @@ require "nav.php";
           <div class="row button">
             <input type="submit" value="Login">
           </div>
-          <div class="signup-link"><a href="#">Forgot password?</a></div>
+          <div class="signup-link"><a href="forgotpass.php">Forgot password?</a></div>
           <div class="signup-link">Not a member? <a onclick="reg()">Signup now</a></div>
         </form>
       </div>

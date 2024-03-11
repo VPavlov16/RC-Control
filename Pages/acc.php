@@ -45,10 +45,6 @@ try {
     <label for="mins">Your minutes:</label>
     <?php echo"<p id='mins' class='p-info'>".$info['minutes']."</p>"?>
     <br>
-    <button class="button">Change Email</button>
-    <br>
-    <button class="button">Change Password</button>
-    <br>
     <button class="button" onclick=logout()>Log Out</button>
     </div>
 </body>
