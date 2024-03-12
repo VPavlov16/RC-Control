@@ -3,3 +3,4 @@ vendor/psr/log/
 vendor/bluerhinos/phpmqtt/
 vendor/myclabs/php-enum/
 vendor/php-mqtt/client/
+PHP/mailerInfo.php

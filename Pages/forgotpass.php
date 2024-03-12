@@ -7,6 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
+require('../PHP/mailerInfo.php');
 
 $host = "localhost";
 $port = "5432";
@@ -41,13 +42,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com'; 
             $mail->SMTPAuth   = true;               
-            $mail->Username   = 'venipavlov05@gmail.com';
-            $mail->Password   = 'xyrg mebn xgoe xxdn';     
+            $mail->Username   = $uname;
+            $mail->Password   = $pass;     
             $mail->SMTPSecure = 'tls';               
-            $mail->Port       = 587;                 
-
-            
-            $mail->setFrom('venipavlov05@gmail.com', 'RC-Control Team');
+            $mail->Port       = 587; 
+            $mail->setFrom($uname, 'RC-Control Team');
             $mail->addAddress($email);
 
             
