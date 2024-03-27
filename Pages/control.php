@@ -1,21 +1,10 @@
 <?php
 require "nav.php";
-require '../vendor/autoload.php';
 
 
 if (isset($_SESSION['user'])) {
     $mins = $user['minutes'];
 }
-
-$server   = 'public.mqtthq.com';
-$port     = 1883;
-
-use PhpMqtt\Client\MqttClient;
-
-$mqtt = new MqttClient($server, $port);
-
-$mqtt->connect();
-//$mqtt->publish('RCControl', 'Hello!', 0);
 
 $host = "localhost";
 $port = "5432";
@@ -191,24 +180,23 @@ if ($selectedVehicleId) {
         <div id="keyboardButtons">
             <button id="backButton">Назад</button>
             <div class="keyboard-row wasd">
-                <button class="keyboard-key" onclick="sendMqttMessage('forward');" >W</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('forward');" >W</button>
             </div>
             <div class="keyboard-row wasd">
-                <button class="keyboard-key" onclick="sendMqttMessage('left');">A</button>
-                <button class="keyboard-key" onclick="sendMqttMessage('backwards');">S</button>
-                <button class="keyboard-key" onclick="sendMqttMessage('right');">D</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('left');">A</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('backward');">S</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('right');">D</button>
             </div>
             <div class="keyboard-row arrows">
-                <button class="keyboard-key" onclick="sendMqttMessage('forward');">↑</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('forward');">↑</button>
             </div>
             <div class="keyboard-row arrows">
-                <button class="keyboard-key" onclick="sendMqttMessage('left');">←</button>
-                <button class="keyboard-key" onclick="sendMqttMessage('backwards');">↓</button>
-                <button class="keyboard-key" onclick="sendMqttMessage('right');">→</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('left');">←</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('backward');">↓</button>
+                <button class="keyboard-key" onclick="sendHttpRequest('right');">→</button>
             </div>
         </div>
-    <?php endif; ?>
-
+        <?php endif; ?>
 <?php else: ?>
     <div class="no-vehicle">
         <p>Моля, изберете устройство!</p>
@@ -217,18 +205,18 @@ if ($selectedVehicleId) {
 <?php endif; ?>
 
 <script>
-    function sendMqttMessage(direction) {
+    function sendHttpRequest(direction) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    console.log('MQTT message sent successfully.');
+                    console.log('HTTP request sent successfully.');
                 } else {
-                    console.error('Error sending MQTT message.');
+                    console.error('Error sending HTTP request.');
                 }
             }
         };
-        xhr.open("POST", "../PHP/send_message.php", true);
+        xhr.open("POST", "../PHP/send_command.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send("direction=" + direction);
     }
@@ -267,19 +255,19 @@ if ($selectedVehicleId) {
         switch(event.key) {
             case 'w':
             case 'ArrowUp':
-                sendMqttMessage('forward');
+                sendHttpRequest('forward');
                 break;
             case 'a':
             case 'ArrowLeft':
-                sendMqttMessage('left');
+                sendHttpRequest('left');
                 break;
             case 's':
             case 'ArrowDown':
-                sendMqttMessage('backward');
+                sendHttpRequest('backward');
                 break;
             case 'd':
             case 'ArrowRight':
-                sendMqttMessage('right');
+                sendHttpRequest('right');
                 break;
             default:
                 break;
