@@ -6,7 +6,7 @@ if (isset($_POST['direction'])) {
     $direction = $_POST['direction'];
 
     // Construct the URL with the ESP32's IP address
-    $esp_ip = "192.168.145.54"; // Update this with your ESP32's IP address
+    $esp_ip = "192.168.48.73"; // Update this with your ESP32's IP address
     $url = "http://$esp_ip/$direction"; // Use the direction as the endpoint
 
     // Send HTTP request to the ESP32
