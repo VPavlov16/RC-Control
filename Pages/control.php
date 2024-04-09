@@ -3,7 +3,7 @@ require "nav.php";
 
 
 if (isset($_SESSION['user'])) {
-    $mins = $user['minutes'];
+    $mins = $_SESSION['user'][4];
 }
 
 $host = "localhost";

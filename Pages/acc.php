@@ -23,6 +23,12 @@ try {
     $stmt->execute();
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
     
+    if ($info['type'] == "admin") {
+        $buttonDisplay = "inline-block";
+    } else {
+        $buttonDisplay = "none";
+    }
+
     $conn = null;
 
 ?>
@@ -33,6 +39,11 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../CSS/acc.css">
+    <style>
+        .admin{
+            display: <?php echo $buttonDisplay; ?>;
+        }
+    </style>
 </head>
 <body>
 
@@ -44,6 +55,8 @@ try {
     <br>
     <label for="mins">Your minutes:</label>
     <?php echo"<p id='mins' class='p-info'>".$info['minutes']."</p>"?>
+    <br>
+    <button onclick="window.location.href='adminPanel.php';" class="button admin">Добавяне на устройство</button>      
     <br>
     <button class="button" onclick=logout()>Log Out</button>
     </div>

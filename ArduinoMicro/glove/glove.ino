@@ -19,6 +19,8 @@ void loop()
   valuePointer = analogRead(pointer);
   valueThumb = analogRead(thumb);
   
+  //Serial.println(valueThumb);
+  
  
   if (valueMiddle < threshold) {
     Serial.println("Middle finger is bent!");

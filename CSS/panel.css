@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif; 
+}
+
+body{
+    background-image: url("../images/background.png");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-form{
+    margin: 20px;
+}
+
+.panel{
+    background-color: #f6f6f6;
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 80vh;
+    padding: 20px 35px;
+    border-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media only screen and (max-width: 300px) {
+    .panel{
+        max-width: 260px;
+    }
+}
+
+.txt-num {
+    width: 100%;
+    padding: 15px 20px;
+    display: block;
+    font-family: Roboto;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+.txt-num:focus{
+    outline: solid black 1px;
+}
+
+.custom-input{
+    color:#f6f6f6;
+    background-color: black;
+    border-radius: 5px;
+    width: 100%;
+    min-width: 83px;
+    margin-bottom: 10px;
+}
+
+.custom-input::file-selector-button{
+  border: 2px solid #000000;
+  padding: .5em .5em;
+  border-radius: 5px;
+  background-color: #0197F6;
+  transition: 0.5s;
+}
+
+.custom-input::file-selector-button:hover{
+    background-color:#0197F6;
+}
+
+.custom-input{
+    background-color: #0a53be;
+}
+
+.inputs{
+    text-indent: 1em;
+}
+
+.btn-div{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.send-btn{
+    background-color: #0a53be;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: all ease-in-out .3s;
+    text-transform: uppercase;
+    border: 2px solid black;
+    font-weight: 600;
+    font-size: 14px;
+    width: 50%;
+    color: #ffffff;
+}
+
+.send-btn:hover{
+    background-color: #0197F6;
+    color: #000000;
+}
+
+.cancel-btn{
+    background-color: #e60e0e;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: all ease-in-out .3s;
+    text-transform: uppercase;
+    border: 2px solid rgb(0, 0, 0);
+    font-size: 14px;
+    font-weight: 600;
+    width: 50%;
+    text-align: center;
+    color: #ffffff;
+    margin-left: 10px;
+}
+
+.cancel-btn:hover{
+    background-color: #f14c4c;
+    color: #000000;
+}
+
+.panel-title{
+    text-align: center;
+    color: #000000; 
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
+    border-bottom: #000000 1px solid;
+}
+
+.div-textarea{
+    display: grid;
+    place-items: center;
+}
+
+.textarea{
+    margin: 20px;
+    border-radius: 5px;
+    padding: 20px;
+    border: #000000 1px solid;
+    resize: vertical;
+    font-size: 14px;
+    width: 100%;
+}

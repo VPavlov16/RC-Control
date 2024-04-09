@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            $_SESSION['user'] = [$user['id'], $user['email'],$user['info'],$user['emInfo'],$user['minutes']]; 
+            $_SESSION['user'] = [$user['id'], $user['email'],$user['info'],$user['emInfo'],$user['minutes'],$user['type']]; 
             $_SESSION['info'] = "none";
             session_regenerate_id(true);
 

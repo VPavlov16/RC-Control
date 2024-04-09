@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $rawPassword = $_POST["passw2"];
     $_SESSION['emInfo'] = "none";
+    $type = 'user';
 
     $hashedPassword = hash('sha256', $rawPassword);
 
@@ -35,10 +36,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $insertUserSql = "INSERT INTO users (email, password) VALUES (:email, :password)";
+    $insertUserSql = "INSERT INTO users (email, password, type) VALUES (:email, :password, :type)";
     $insertUserStmt = $conn->prepare($insertUserSql);
     $insertUserStmt->bindParam(':email', $email);
     $insertUserStmt->bindParam(':password', $hashedPassword);
+    $insertUserStmt->bindParam(':type', $type);
 
     try {
         $insertUserStmt->execute();
