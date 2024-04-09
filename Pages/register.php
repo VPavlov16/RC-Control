@@ -31,58 +31,58 @@ require "nav.php";
     <!-- log -->
     <div id="log" class="container">
       <div class="wrapper">
-        <div class="title"><span>Login</span></div>
+        <div class="title"><span>Влизане</span></div>
         <form action="../PHP/logController.php" method="POST">
           <div class="row">
             <i class="fas fa-user"></i>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Имейл" required>
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" name="pass" id="passw" placeholder="Password" required>
+            <input type="password" name="pass" id="passw" placeholder="Парола" required>
           </div>
           <div class="shpass pass">
             <i class="far fa-eye-slash" id="icon" style="color: #0197f6; margin-right: 5px;"></i>
             <input id="check" type="checkbox" onclick="showPass()">
-            <label for="check">Show password</label>
+            <label for="check">Покажи паролата</label>
           </div>
           <div class="remember">
               <i class="far fa-save fa-lg" id="iconka" style="color: #0197f6; margin-right: 5px;"></i>
               <input id="rem"  name="remember_me" type="checkbox">
-              <label for="rem">Remember me</label>
+              <label for="rem">Запомняне</label>
           </div>
-          <h5 class="wrongInfo" id="wrongInfo">Wrong password/email</h5>
+          <h5 class="wrongInfo" id="wrongInfo">Грешна парола или имейл!</h5>
           <div class="row button">
-            <input type="submit" value="Login">
+            <input type="submit" value="Влизане">
           </div>
-          <div class="signup-link"><a href="forgotpass.php">Forgot password?</a></div>
-          <div class="signup-link">Not a member? <a onclick="reg()">Signup now</a></div>
+          <div class="signup-link"><a href="forgotpass.php">Забравена парола?</a></div>
+          <div class="signup-link">Нямате профил? <a onclick="reg()">Регистриране</a></div>
         </form>
       </div>
     </div>
     <!-- reg -->
     <div id="reg" class="container">
       <div class="wrapper">
-        <div class="title"><span>Register</span></div>
+        <div class="title"><span>Регистриране</span></div>
         <form action="../PHP/regController.php" method="POST">
           <div class="row">
             <i class="fas fa-user" id="icon"></i>
-            <input type="email" name="email" placeholder="Email" required>
+            <input type="email" name="email" placeholder="Имейл" required>
           </div>
           <div class="row">
             <i class="fas fa-lock"></i>
-            <input type="password" name="passw2" id="passw2" min=8 max=30 placeholder="Password" required>
+            <input type="password" name="passw2" id="passw2" min=8 max=30 placeholder="Парола" required>
           </div>
-          <h5 class="wrongEmail" id="wrongEmail">Email is already registered</h5>
+          <h5 class="wrongEmail" id="wrongEmail">Имейлът вече е регистриран!</h5>
           <div class="shpass pass">
             <i class="far fa-eye-slash" id="icon2" style="color: #0197f6; margin-right: 5px;"></i>
             <input id="check2" type="checkbox" onclick="showPass()">
-            <label for="check2">Show password</label>
+            <label for="check2">Покажи паролата</label>
           </div>
           <div class="row button">
-            <input type="submit"  value="Register">
+            <input type="submit"  value="Регистриране">
           </div>
-          <div class="signup-link">Already a member? <a onclick="log()">Login now</a></div>
+          <div class="signup-link">Вече имате профил? <a onclick="log()">Влизане</a></div>
         </form>
       </div>
     </div>

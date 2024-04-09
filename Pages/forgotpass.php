@@ -100,7 +100,7 @@ function generateToken() {
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="row">
                 <i class="fas fa-user"></i>
-                <input type="email" name="email" placeholder="Email" required>
+                <input type="email" name="email" placeholder="Имейл" required>
             </div>
             <p class='sent'>Имейлът бе успешно изпратен!</p>
             <p class='error'>Не е намерен профил с дадения имейл!</p>

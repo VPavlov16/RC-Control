@@ -1,9 +1,8 @@
 <?php
 require "nav.php";
 
-
 if (isset($_SESSION['user'])) {
-    $mins = $_SESSION['user'][4];
+    $mins = $user['minutes'];
 }
 
 $host = "localhost";
@@ -40,6 +39,7 @@ if ($selectedVehicleId) {
 } else {
     $selectedVehicle = null;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="bg">
@@ -155,56 +155,110 @@ if ($selectedVehicleId) {
 </head>
 <body>
 
-<?php if ($selectedVehicle !== null): ?>
-    <div class="selected-vehicle">
-        <a href="#">
-            <img src="../images/svg/<?php echo $svg; ?>" alt="<?php echo $selectedVehicle['name']; ?>">
-        </a>
-        <p style="margin: 0;"><?php echo $selectedVehicle['name']; ?></p>
-    </div>
+<?php if ($mins <= 0): ?>
+    <div class="no-vehicle">
+            <p>Нямате налични минути,можете да изчакате или да си закупите!</p>
+            <a class="btn btn-primary" href="prices.php">Купи минути.</a>
+        </div>
+<?php else: ?>
 
-    <?php if ($selectedVehicle['usedby'] !== null): ?>
+    <?php if ($selectedVehicle !== null): ?>
+        <div class="selected-vehicle">
+            <a href="#">
+                <img src="../images/svg/<?php echo $svg; ?>" alt="<?php echo $selectedVehicle['name']; ?>">
+            </a>
+            <p style="margin: 0;"><?php echo $selectedVehicle['name']; ?></p>
+        </div>
+
+        <?php if ($selectedVehicle['usedby'] !== null): ?>
+            <div class="no-vehicle">
+                <p>Моля, изберете друго устройство!</p>
+                <a class="btn btn-primary" href="vehicles.php">Избери устройство</a>
+            </div>
+        <?php else: ?>
+            <div class="minutes">
+                    <p style="margin: 0;" >Налични минути: <span id="remainingMinutes"><?php echo $mins; ?></span></p>
+                </div>
+                <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Старт</button>
+                <div id="controlButtons" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                    <button id="wasdButton">WASD</button>
+                    <button id="arrowsButton">Arrows</button>
+                </div>
+            <div id="keyboardButtons">
+                <button id="backButton">Назад</button>
+                <div class="keyboard-row wasd">
+                    <button class="keyboard-key" onclick="sendHttpRequest('forward');" >W</button>
+                </div>
+                <div class="keyboard-row wasd">
+                    <button class="keyboard-key" onclick="sendHttpRequest('left');">A</button>
+                    <button class="keyboard-key" onclick="sendHttpRequest('backward');">S</button>
+                    <button class="keyboard-key" onclick="sendHttpRequest('right');">D</button>
+                </div>
+                <div class="keyboard-row arrows">
+                    <button class="keyboard-key" onclick="sendHttpRequest('forward');">↑</button>
+                </div>
+                <div class="keyboard-row arrows">
+                    <button class="keyboard-key" onclick="sendHttpRequest('left');">←</button>
+                    <button class="keyboard-key" onclick="sendHttpRequest('backward');">↓</button>
+                    <button class="keyboard-key" onclick="sendHttpRequest('right');">→</button>
+                </div>
+            </div>
+            <?php endif; ?>
+    <?php else: ?>
         <div class="no-vehicle">
-            <p>Моля, изберете друго устройство!</p>
+            <p>Моля, изберете устройство!</p>
             <a class="btn btn-primary" href="vehicles.php">Избери устройство</a>
         </div>
-    <?php else: ?>
-        <div class="minutes">
-            <p style="margin: 0;">Налични минути: <?php echo $mins; ?></p>
-        </div>
-        <button id="startButton" style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%);">Старт</button>
-        <div id="controlButtons" style="display: none; text-align: center; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <button id="wasdButton">WASD</button>
-            <button id="arrowsButton">Arrows</button>
-        </div>
-        <div id="keyboardButtons">
-            <button id="backButton">Назад</button>
-            <div class="keyboard-row wasd">
-                <button class="keyboard-key" onclick="sendHttpRequest('forward');" >W</button>
-            </div>
-            <div class="keyboard-row wasd">
-                <button class="keyboard-key" onclick="sendHttpRequest('left');">A</button>
-                <button class="keyboard-key" onclick="sendHttpRequest('backward');">S</button>
-                <button class="keyboard-key" onclick="sendHttpRequest('right');">D</button>
-            </div>
-            <div class="keyboard-row arrows">
-                <button class="keyboard-key" onclick="sendHttpRequest('forward');">↑</button>
-            </div>
-            <div class="keyboard-row arrows">
-                <button class="keyboard-key" onclick="sendHttpRequest('left');">←</button>
-                <button class="keyboard-key" onclick="sendHttpRequest('backward');">↓</button>
-                <button class="keyboard-key" onclick="sendHttpRequest('right');">→</button>
-            </div>
-        </div>
-        <?php endif; ?>
-<?php else: ?>
-    <div class="no-vehicle">
-        <p>Моля, изберете устройство!</p>
-        <a class="btn btn-primary" href="vehicles.php">Избери устройство</a>
-    </div>
+    <?php endif; ?>
 <?php endif; ?>
 
 <script>
+    
+    var remainingMinutes = <?php echo $mins; ?>;
+
+    var timer;
+
+    // Function to update remaining minutes in the database
+    function updateMinutes() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../PHP/updateMins.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("user_id=<?php echo $_SESSION['user'][0]; ?>&minutes=" + remainingMinutes);
+    }
+    function zeroMins() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "../PHP/zeroMins.php", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("user_id=<?php echo $_SESSION['user'][0]; ?>");
+    }
+
+    // Function to decrement remaining minutes every minute
+    function decrementMinutes() {
+        if (remainingMinutes > 0) {
+            remainingMinutes--;
+            document.getElementById('remainingMinutes').innerText = remainingMinutes;
+            updateMinutes();
+        } else {
+            clearInterval(timer);
+            // Disable controls or display a message when minutes run out
+            zeroMins();
+            window.location.href = "prices.php";
+
+        }
+    }
+
+    // Start the timer when the user clicks the Start button
+    document.getElementById('startButton').addEventListener('click', function () {
+        document.getElementById('startButton').style.display = 'none';
+        document.getElementById('controlButtons').style.display = 'flex';
+        timer = setInterval(decrementMinutes, 60000); // Run decrementMinutes every minute
+    });
+
+    // Stop the timer and update remaining minutes when the user leaves the page
+    window.addEventListener('beforeunload', function () {
+        clearInterval(timer);
+        updateMinutes();
+    });
     function sendHttpRequest(direction) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
@@ -221,10 +275,6 @@ if ($selectedVehicleId) {
         xhr.send("direction=" + direction);
     }
 
-    document.getElementById('startButton').addEventListener('click', function () {
-        document.getElementById('startButton').style.display = 'none';
-        document.getElementById('controlButtons').style.display = 'flex';
-    });
 
     document.getElementById('wasdButton').addEventListener('click', function () {
         document.getElementById('keyboardButtons').style.display = 'block';
