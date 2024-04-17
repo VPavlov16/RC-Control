@@ -3,10 +3,13 @@
 const int middle = A2;//lilav
 const int pointer = A1;//siv
 const int thumb = A0;//bql
+const int indexFinger = A3;//sin
 
 int valueMiddle;
 int valuePointer;
 int valueThumb;
+int valueIndex;
+
 int threshold = 90;
 void setup()
 {
@@ -18,12 +21,15 @@ void loop()
   valueMiddle = analogRead(middle);
   valuePointer = analogRead(pointer);
   valueThumb = analogRead(thumb);
-  
-  //Serial.println(valueThumb);
+  valueIndex = analogRead(indexFinger);
+  Serial.println(valueIndex);
   
  
   if (valueMiddle < threshold) {
     Serial.println("Middle finger is bent!");
+  }
+  if (valueIndex < threshold) {
+    Serial.println("Index finger is bent!");
   }
 
   if (valuePointer < threshold) {

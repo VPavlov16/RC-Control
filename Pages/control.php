@@ -151,6 +151,33 @@ if ($selectedVehicleId) {
             padding: 5px 10px;
             font-size: 14px; 
         }
+        @media only screen and (max-width: 768px) {
+            .selected-vehicle {
+    top: auto; /* Премахваме горната позиция */
+    bottom: 10px; /* Позиционираме "selected-vehicle" относно долната част на екрана */
+    left: 10px; /* Позиция отляво */
+    margin: 10px; /* Външен отстъп */
+    position: fixed; /* Фиксирана позиция */
+}
+
+.minutes {
+    top: 100px; /* Оставяме "minutes" горе на екрана */
+    right: 10px; /* Позиция отдясно */
+    margin: 10px; /* Външен отстъп */
+    position: fixed; /* Фиксирана позиция */
+}
+
+    .no-vehicle {
+        top: 110px; /* Преместваме no-vehicle надолу */
+        max-width: 90%;
+    }
+    .keyboard-key {
+        width: 10%; /* Променяме ширината на бутоните */
+        height: 50px; /* Променяме височината на бутоните */
+        font-size: 12px; /* Променяме размера на шрифта на бутоните */
+    }
+}
+
     </style>
 </head>
 <body>
