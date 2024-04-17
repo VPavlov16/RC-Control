@@ -13,31 +13,31 @@ body {
 }
 
 .column {
-    flex: 1 0 25%; /* Всички колони са с равен размер */
+    flex: 1 0 25%; 
     margin: 10px;
     padding: 20px;
     border-radius: 5px;
     text-align: center;
-    background-color: #F0F8FF; /* По-блед синьо */
+    background-color: #F0F8FF; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .column h2 {
-    font-size: 1.5em; /* Увеличен размер на заглавията */
+    font-size: 1.5em; 
     margin-bottom: 10px;
-    color: #333; /* Тъмно синьо */
+    color: #333; 
 }
 
 .price {
-    font-size: 1.2em; /* Увеличен размер на цената */
+    font-size: 1.2em;
     font-weight: bold;
     color: rgb(30, 1, 123);
-    margin-top: 10px; /* Премести цената надолу */
+    margin-top: 10px; 
 }
 
 .bonus, .minutes, .vip-access {
-    font-size: 1em; /* Среден размер на текста */
-    color: #666; /* Сиво */
+    font-size: 1em; 
+    color: #666; 
 }
 
 @media (max-width: 768px) {

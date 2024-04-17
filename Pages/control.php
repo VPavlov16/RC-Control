@@ -153,30 +153,30 @@ if ($selectedVehicleId) {
         }
         @media only screen and (max-width: 768px) {
             .selected-vehicle {
-    top: auto; /* Премахваме горната позиция */
-    bottom: 10px; /* Позиционираме "selected-vehicle" относно долната част на екрана */
-    left: 10px; /* Позиция отляво */
-    margin: 10px; /* Външен отстъп */
-    position: fixed; /* Фиксирана позиция */
-}
+             top: auto; 
+             bottom: 10px; 
+             left: 10px; 
+             margin: 10px; 
+            position: fixed; 
+        }
 
-.minutes {
-    top: 100px; /* Оставяме "minutes" горе на екрана */
-    right: 10px; /* Позиция отдясно */
-    margin: 10px; /* Външен отстъп */
-    position: fixed; /* Фиксирана позиция */
-}
+        .minutes {
+             top: 100px; 
+             right: 10px; 
+             margin: 10px; 
+             position: fixed; 
+        }
 
-    .no-vehicle {
-        top: 110px; /* Преместваме no-vehicle надолу */
-        max-width: 90%;
+        .no-vehicle {
+            top: 110px;
+            max-width: 90%;
+        }
+        .keyboard-key {
+            width: 10%; 
+           height: 50px; 
+            font-size: 12px; 
+        }
     }
-    .keyboard-key {
-        width: 10%; /* Променяме ширината на бутоните */
-        height: 50px; /* Променяме височината на бутоните */
-        font-size: 12px; /* Променяме размера на шрифта на бутоните */
-    }
-}
 
     </style>
 </head>
@@ -245,7 +245,7 @@ if ($selectedVehicleId) {
 
     var timer;
 
-    // Function to update remaining minutes in the database
+    // update remaining minutes in the database
     function updateMinutes() {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "../PHP/updateMins.php", true);
@@ -259,7 +259,7 @@ if ($selectedVehicleId) {
         xhr.send("user_id=<?php echo $_SESSION['user'][0]; ?>");
     }
 
-    // Function to decrement remaining minutes every minute
+    // decrement remaining minutes every minute
     function decrementMinutes() {
         if (remainingMinutes > 0) {
             remainingMinutes--;
@@ -267,21 +267,21 @@ if ($selectedVehicleId) {
             updateMinutes();
         } else {
             clearInterval(timer);
-            // Disable controls or display a message when minutes run out
+            // Disable controls 
             zeroMins();
             window.location.href = "prices.php";
 
         }
     }
 
-    // Start the timer when the user clicks the Start button
+    // Start timer 
     document.getElementById('startButton').addEventListener('click', function () {
         document.getElementById('startButton').style.display = 'none';
         document.getElementById('controlButtons').style.display = 'flex';
-        timer = setInterval(decrementMinutes, 60000); // Run decrementMinutes every minute
+        timer = setInterval(decrementMinutes, 60000);
     });
 
-    // Stop the timer and update remaining minutes when the user leaves the page
+    // Stop the timer and update 
     window.addEventListener('beforeunload', function () {
         clearInterval(timer);
         updateMinutes();
