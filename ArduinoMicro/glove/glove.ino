@@ -41,20 +41,13 @@ void setup() {
 void sendDirection(String direction) {
     HTTPClient http;
 
-    // Get the client's IP address
     //String esp_ip = WiFi.localIP().toString();
-
-    // Construct the URL with the client's IP address
     String url = "http://192.168.48.73/send_command.php";
-
-    // Add the direction as a POST parameter
     http.begin(url);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    // Prepare POST data
     String postData = "direction=" + direction;
 
-    // Send the POST request
     int httpResponseCode = http.POST(postData);
 
     if (httpResponseCode > 0) {

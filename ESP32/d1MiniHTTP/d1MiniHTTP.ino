@@ -15,22 +15,22 @@ const int right = 1650;
 const int midpoint = 1500;
 
 #define ESC_PIN 14
-#define ESC_PIN2 12 // GPIO pin number for the ESC control
+#define ESC_PIN2 12 
 
 Servo esc;
-Servo esc2; // Declare second servo for second ESC pin
+Servo esc2; 
 WiFiServer server(80);
 
 void setup() {
   Serial.begin(115200);
   esc.attach(ESC_PIN);
-  esc2.attach(ESC_PIN2); // Attach second ESC to the designated pin
-  delay(1000); // Wait for ESCs to initialize
+  esc2.attach(ESC_PIN2); 
+  delay(1000); 
 
-  // Send a neutral signal to arm the ESCs
+ 
   esc.writeMicroseconds(midpoint);
   esc2.writeMicroseconds(midpoint);
-  delay(5000); // Wait for ESCs to recognize the neutral signal (arming)
+  delay(5000); 
 
   // Connect to WiFi
   Serial.print("Connecting to WiFi...");
@@ -42,7 +42,6 @@ void setup() {
   Serial.println("Connected to WiFi");
   Serial.println(WiFi.localIP());
 
-  // Start HTTP server
   server.begin();
   Serial.println("HTTP server started");
 }
@@ -50,7 +49,6 @@ void setup() {
 void loop() {
   WiFiClient client = server.available();
   if (client) {
-    // Handle incoming request asynchronously
     handleRequest(client);
   }
 }
@@ -61,11 +59,11 @@ void handleRequest(WiFiClient client) {
     return;
   }
 
-  // Read the HTTP request
+
   String request = client.readStringUntil('\r');
   client.flush();
 
-  // Process the request and send response
+
   if (request.indexOf("/forward") != -1) {
     handleForward(client);
   } else if (request.indexOf("/left") != -1) {
@@ -97,23 +95,16 @@ void handleForward(WiFiClient client) {
   client.println("Forward command received");
   Serial.println("Forward command received");
 
-  // Move forward at half speed
-  esc.writeMicroseconds(forward); // Adjusted from 1500 to move forward at half speed
-  delay(1500); // Move for 1.5 seconds
-  esc.writeMicroseconds(midpoint); // Stop the movement
+  
+  esc.writeMicroseconds(forward); 
+  delay(1500);
+  esc.writeMicroseconds(midpoint); 
 }
 
-void handleLeft(WiFiClient client) {
-  client.println("HTTP/1.1 200 OK");
-  client.println("Content-Type: text/plain");
-  client.println();
-  client.println("Left command received");
+void handleLeft() {
   Serial.println("Left command received");
-
-  //esc.writeMicroseconds(1550); // Adjusted from 1500 to move left at half speed
-  esc2.writeMicroseconds(left); // Adjusted from 1500 to move left at half speed
-  delay(1500); // Move for 1.5 seconds
-  //esc.writeMicroseconds(1500); // Stop the movement
+  esc2.writeMicroseconds(left); 
+  delay(1500); 
   esc2.writeMicroseconds(midpoint);
 }
 
@@ -124,9 +115,8 @@ void handleRight(WiFiClient client) {
   client.println("Right command received");
   Serial.println("Right command received");
 
-   esc2.writeMicroseconds(right); // Adjusted from 1500 to move left at half speed
-  delay(1500); // Move for 1.5 seconds
-  //esc.writeMicroseconds(1500); // Stop the movement
+   esc2.writeMicroseconds(right); 
+  delay(1500); 
   esc2.writeMicroseconds(midpoint);
 }
 
@@ -137,8 +127,8 @@ void handleBackward(WiFiClient client) {
   client.println("Backward command received");
   Serial.println("Backward command received");
 
-  // Move backward at half speed
-  esc.writeMicroseconds(backward); // Adjusted from 1500 to move forward at half speed
-  delay(1500); // Move for 1.5 seconds
-  esc.writeMicroseconds(midpoint); // Stop the movement
+  
+  esc.writeMicroseconds(backward); 
+  delay(1500);
+  esc.writeMicroseconds(midpoint); 
 }
