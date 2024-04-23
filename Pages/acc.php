@@ -43,6 +43,7 @@ try {
         .admin{
             display: <?php echo $buttonDisplay; ?>;
         }
+        
     </style>
 </head>
 <body>

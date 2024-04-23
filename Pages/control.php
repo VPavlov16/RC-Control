@@ -49,6 +49,9 @@ if ($selectedVehicleId) {
     <title>Control Page</title>
     <link rel="stylesheet" href="../CSS/bootstrap.css">
     <style>
+        body {
+       background-color: rgb(202, 228, 237);
+    }
         .selected-vehicle {
             display: flex;
             align-items: center;
