@@ -40,15 +40,11 @@ void setup() {
 
 void sendDirection(String direction) {
     HTTPClient http;
-
-    //String esp_ip = WiFi.localIP().toString();
-    String url = "http://192.168.48.73/send_command.php";
+    String url = "http://192.168.25.73/" + direction;
     http.begin(url);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    String postData = "direction=" + direction;
-
-    int httpResponseCode = http.POST(postData);
+    int httpResponseCode = http.GET();
 
     if (httpResponseCode > 0) {
         Serial.print("HTTP request sent successfully. Response code: ");
@@ -69,20 +65,23 @@ void loop() {
     if (valueThumb < threshold) {
         Serial.println("Thumb is bent!");
 
+        String currentDirection = "none";
+
         if (valueMiddle < threshold && valuePointer < threshold) {
-            Serial.println("forward");
-            sendDirection("forward");
+            currentDirection = "forward";
+            Serial.println(currentDirection);
+            sendDirection(currentDirection);
         } else if (valueMiddle < threshold && valuePointer > threshold) {
-            Serial.println("left");
-            sendDirection("left");
+            currentDirection = "left";
+            Serial.println(currentDirection);
+            sendDirection(currentDirection);
         } else if (valueMiddle > threshold && valuePointer < threshold) {
-            Serial.println("right");
-            sendDirection("right");
-        } else {
-            Serial.println("none");
-            sendDirection("none");
+            currentDirection = "right";
+            Serial.println(currentDirection);
+            sendDirection(currentDirection);
+            
         }
     }
 
-    delay(3000);
+    delay(500); // Reduced delay to check more frequently
 }
