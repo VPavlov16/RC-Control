@@ -1,7 +1,7 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
 
-const char* ssid = "Xiaomi Mi 11";      // Enter your WiFi SSID here
+const char* ssid = "Xiaomi Mi 11";      
 const char* password = "otednodoosem"; 
 
 const int middle = 36; // Lilav
@@ -32,15 +32,14 @@ void setup() {
 
     Serial.println("");
     Serial.println("WiFi connected.");
-  
-    // Print the IP address
+
     Serial.print("IP address: ");
     Serial.println(WiFi.localIP());
 }
 
 void sendDirection(String direction) {
     HTTPClient http;
-    String url = "http://192.168.25.73/" + direction;
+    String url = "http://192.168.63.73/" + direction;
     http.begin(url);
     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -83,5 +82,5 @@ void loop() {
         }
     }
 
-    delay(500); // Reduced delay to check more frequently
+    delay(500); 
 }

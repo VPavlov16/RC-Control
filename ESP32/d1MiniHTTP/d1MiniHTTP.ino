@@ -6,11 +6,11 @@
 const char* ssid = "Xiaomi Mi 11";
 const char* password = "otednodoosem";
 
-const int forward = 1220;
-const int backward = 1800;
+const int forward = 1200;
+const int backward = 1850;
 
-const int left = 1220;
-const int right = 1800; 
+const int left = 1200;
+const int right = 1850; 
 
 const int midpoint = 1500;
 
@@ -81,7 +81,6 @@ void handleRoot(WiFiClient client) {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/plain");
   client.println();
-  client.println("ESP8266 Control Server");
   Serial.println("ESP8266 Control Server");
 }
 
@@ -89,7 +88,6 @@ void handleForward(WiFiClient client) {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/plain");
   client.println();
-  client.println("Forward command received");
   Serial.println("Forward command received");
 
   esc.writeMicroseconds(forward); 
@@ -101,7 +99,6 @@ void handleLeft(WiFiClient client) {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/plain");
   client.println();
-  client.println("Left command received");
   Serial.println("Left command received");
 
   esc2.writeMicroseconds(left); 
@@ -113,7 +110,6 @@ void handleRight(WiFiClient client) {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/plain");
   client.println();
-  client.println("Right command received");
   Serial.println("Right command received");
 
   esc2.writeMicroseconds(right); 
@@ -125,7 +121,6 @@ void handleBackward(WiFiClient client) {
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/plain");
   client.println();
-  client.println("Backward command received");
   Serial.println("Backward command received");
 
   esc.writeMicroseconds(backward); 

@@ -2,7 +2,7 @@
 
 if (isset($_POST['direction'])) {
     $direction = $_POST['direction'];
-    $esp_ip = "192.168.25.73"; 
+    $esp_ip = "192.168.63.73"; 
     $url = "http://$esp_ip/$direction"; 
 
     // send http
